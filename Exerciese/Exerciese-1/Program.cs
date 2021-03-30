@@ -23,11 +23,11 @@ namespace Exerciese_1
                 string coversion = Console.ReadLine();
                 bool conversionPrased = int.TryParse(coversion, out int fahrOrKel);
 
-                if (fahrOrKel < 2 && fahrOrKel > 0 && fahrOrKel == 1)
+                if (fahrOrKel == 1)
                 {
                     Convert(celsius, true);
                 }
-                else if (fahrOrKel <= 2 && fahrOrKel > 0 && fahrOrKel == 2)
+                else if (fahrOrKel == 2)
                 {
                     Convert(celsius, false);
                 }
