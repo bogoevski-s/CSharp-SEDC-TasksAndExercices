@@ -17,21 +17,15 @@ namespace Task_6
                 if (userInput == "n" || userInput == "N")
                 {
                     foreach(string name in namesArray){
-                        Console.Write(" " + name + " ");
-                        //Console.Write(name);
+                        Console.Write("\n " + name + " \n");
                     }
                     break;
                 }
                 else
                 {
                     counter++;
-                    //Console.WriteLine("Enter name in the array:");
-                    //string userInputName = Console.ReadLine();
                     Array.Resize(ref namesArray, counter);
                     namesArray[counter - 1] = userInput; 
-                    //namesArray[counter] = userInputName;
-                    
-
                 }
             }
         }
