@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Text.RegularExpressions;
 namespace ATM
 {
     class Program
@@ -20,9 +20,25 @@ namespace ATM
                 Console.WriteLine($"Customer pin: {customer2.CheckPin()}");
             }
 
-            long carNumber = 1111222233334444;
-            string newNum = String.Format("{0:0000-0000-0000-0000}", carNumber);
-            Console.WriteLine(newNum);
+            Console.WriteLine($@"Enter you card number ""XXXX-XXXX-XXXX-XXXX"":");
+            string cardNumber = Console.ReadLine();
+            //bool cardNumParsed = long.TryParse(cardNumber, out long cardNumLong);
+
+            //long carNumber = 1111222233334444;
+
+            //String.Format("{0:0000-0000-0000-0000}", cardNumber);
+
+            //string newNum = String.Format("{0:0000-0000-0000-0000}", cardNumLong);
+            //Console.WriteLine(newNum);
+
+            //Console.WriteLine($@"Enter you card number ""XXXX-XXXX-XXXX-XXXX"":");
+            //string cardNumberInput = Console.ReadLine().Replace(" ", "");
+
+            Regex reg = new Regex("\b4[0-9]{12}(?:[0-9]{3})?\b");
+            var isMatch = reg.IsMatch(cardNumber);
+            Console.WriteLine(isMatch);
+
+
         }
     }
 }
