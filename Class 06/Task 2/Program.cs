@@ -8,11 +8,14 @@ namespace Task_2
     {
         static void Main(string[] args)
         {
-            User[] users = new User[3];
+            User[] users = new User[]
+            {
+             new User(001, "slave", "12345"),
+             new User(045, "bojan", "00123"),
+             new User(156, "bob", "353535")
+        };
 
-            users[0] = new User(001, "slave", "12345");
-            users[1] = new User(045, "nate", "00123");
-            users[2] = new User(156, "MaraGram", "353535");
+            
 
             int arrayCounter = users.Length;
             while (true)
