@@ -7,13 +7,14 @@ namespace Models
     public class Manager : Employee
     {
         private double Bonus { get; set; }
+        public string Department { get; set; }
         public Manager()
         {
 
         }
-        public Manager(string firstName, string lastName, double salary) : base (firstName, lastName, salary, RoleEnum.Manager)
+        public Manager(string firstName, string lastName, double salary, string department) : base (firstName, lastName, salary, RoleEnum.Manager)
         {
-
+            Department = department;
         }
         public void AddBonus(double bonusNumber)
         {

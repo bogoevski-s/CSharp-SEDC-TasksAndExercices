@@ -5,6 +5,7 @@ namespace Models
     {
         Sales = 1,
         Manager,
-        Other
+        Other,
+        Contractor
     }
 }
