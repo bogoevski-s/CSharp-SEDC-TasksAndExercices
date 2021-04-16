@@ -6,6 +6,7 @@ namespace Models
         Sales = 1,
         Manager,
         Other,
-        Contractor
+        Contractor,
+        Ceo
     }
 }

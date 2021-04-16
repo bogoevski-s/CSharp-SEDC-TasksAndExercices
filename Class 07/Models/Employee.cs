@@ -23,7 +23,7 @@ namespace Models
         }
         public string PrintInto()
         {
-            return $"{FirstName} {LastName} - {GetSalary()}";
+            return $"First Name: {FirstName} |  Last Name: {LastName} |  Salary : {Salary}";
         }
         public virtual double GetSalary()
         {
