@@ -12,7 +12,7 @@ namespace Homework
 
             while (true)
             {
-                Console.WriteLine("Please input number:");
+                Console.WriteLine("\nPlease input number:");
                 string userInput = Console.ReadLine();
                 bool userInputParsed = int.TryParse(userInput, out int inputNumber);
                 if (!userInputParsed)
@@ -30,7 +30,6 @@ namespace Homework
 
                     while (true)
                     {
-
                         Console.WriteLine("\n1.Add another number\n2.Exit");
                         string userAddOrExit = Console.ReadLine();
                         bool parsedUserOption = int.TryParse(userAddOrExit, out int menuNum);
@@ -38,7 +37,7 @@ namespace Homework
                         if (!parsedUserOption || menuNum < 1 || menuNum > 2)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nWrong input!!\nPlease select 1 or 2\n");
+                            Console.WriteLine("\nWrong input!!\nPlease select 1 or 2");
                             Console.ResetColor();
                             continue;
                         }
@@ -58,18 +57,24 @@ namespace Homework
                                 Console.ResetColor();
                             }
                             Console.WriteLine("\nList");
+
+                            Console.ForegroundColor = ConsoleColor.Green;
                             intList.ForEach(x => Console.WriteLine(x));
+                            Console.ResetColor();
 
                             Console.WriteLine("\nStack");
 
                             Stack<int> reverseStack = new Stack<int>();
+                            int[] stackArray = intStack.ToArray();
 
+                            Console.ForegroundColor = ConsoleColor.Green;
 
-
-                            foreach (int num in intStack)
+                            for (int i = stackArray.Length-1; i >= 0; i--)
                             {
-                                Console.WriteLine(num);
+                                Console.WriteLine(stackArray[i]);
                             }
+
+                            Console.ResetColor();
 
                             return;
                         }
