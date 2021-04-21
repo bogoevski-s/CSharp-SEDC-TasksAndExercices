@@ -78,14 +78,9 @@ namespace Homework
 
                             return;
                         }
-
                     }
-
                 }
             }
-
-
-
         }
     }
 }
