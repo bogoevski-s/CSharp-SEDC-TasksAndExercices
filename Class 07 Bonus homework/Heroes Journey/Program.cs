@@ -12,8 +12,8 @@ namespace Heroes_Journey
 
             List<Users> allUsers = new List<Users>
             {
-                new Users("SlaveBo", "slave.bogoevski@yahoo.com", "123"),
-                new Users("RenataNate","nate123@gmail.com", "reni3103")
+                new Users("Slave_Bo", "slave@yahoo.com", "123"),
+                new Users("userTest","test@gmail.com", "test123")
             };
             List<Race> allRaces = new List<Race>
             {
@@ -34,8 +34,7 @@ namespace Heroes_Journey
             {
                 Character newCharacterGame = CharaterCreate(allRaces, allClasses);
                 Game(newCharacterGame);
-                
-                
+
                 while (true)
                 {
                     Console.WriteLine("1.Start new game\n2.Exit");
@@ -59,20 +58,8 @@ namespace Heroes_Journey
                         return;
                     }
                 }
-                
-                //if(afterGameChoise == 1)
-                //{
-                //    continue;
-                //}
-                //else
-                //{
-                //    break;
-                //}
+
             }
-            
-
-
-
         }
         static void Login(List<Users> users)
         {
@@ -133,7 +120,6 @@ namespace Heroes_Journey
         
         static Character CharaterCreate(List<Race> allRaces, List<CharacterClass> allClasses)
         {
-
             Race seectedRace = null;
 
             CharacterClass seectedClass = null;
@@ -220,9 +206,7 @@ namespace Heroes_Journey
                 string anyKeyToContiniue = Console.ReadLine();
                 Console.Clear();
                 return newCharacter;
-
-            }
-            
+            } 
         }
 
         static void Game(Character player)
@@ -237,7 +221,6 @@ namespace Heroes_Journey
                 Console.WriteLine("Bandits attack you out of nowhere. They seem very dangerous..");
                 Console.WriteLine($"\nHealth: {player.Health}");
                 Console.WriteLine("\n1.Fight\n2.Run");
-
                 string event1Selection = Console.ReadLine();
                 Console.Clear();
                 bool event1Parsed = int.TryParse(event1Selection, out int event1NumberSelect);
@@ -247,13 +230,12 @@ namespace Heroes_Journey
                     continue;
                 }
                 FightOrRunSelect(event1NumberSelect, banditsDamage, player);
-
                 if (player.Health <= 0) break;
+
 
                 Console.WriteLine("You bump in to one of the guards of the nearby village. They attack you without warning...");
                 Console.WriteLine($"\nHealth {player.Health}");
                 Console.WriteLine("\n1.Fight\n2.Run");
-
                 string event2Selection = Console.ReadLine();
                 Console.Clear();
                 bool event2Parsed = int.TryParse(event2Selection, out int event2NumberSelection);
@@ -264,6 +246,7 @@ namespace Heroes_Journey
                 }
                 FightOrRunSelect(event2NumberSelection, guardsDamage, player);
                 if (player.Health <= 0) break;
+
 
                 Console.WriteLine("A Land Shark appears. It starts chasing you down to eat you...");
                 Console.WriteLine($"\nHealth {player.Health}");
@@ -279,6 +262,7 @@ namespace Heroes_Journey
                 FightOrRunSelect(event3NumberSelection, landSharkDamage, player);
                 if (player.Health <= 0) break;
 
+
                 Console.WriteLine("You accidentally step on a rat. His friends are not happy. They attack..");
                 Console.WriteLine($"\nHealth {player.Health}");
                 Console.WriteLine("\n1.Fight\n2.Run");
@@ -292,6 +276,7 @@ namespace Heroes_Journey
                 }
                 FightOrRunSelect(event4NumberSelection, ratDamage, player);
                 if (player.Health <= 0) break;
+
 
                 Console.WriteLine("You find a huge rock. It comes alive somehow and tries to smash you...");
                 Console.WriteLine($"\nHealth {player.Health}");
