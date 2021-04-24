@@ -29,8 +29,49 @@ namespace Heroes_Journey
             };
 
             Login(allUsers);
-            Character newCharacterGame = CharaterCreate(allRaces, allClasses);
-            Game(newCharacterGame);
+
+            while (true)
+            {
+                Character newCharacterGame = CharaterCreate(allRaces, allClasses);
+                Game(newCharacterGame);
+                
+                
+                while (true)
+                {
+                    Console.WriteLine("1.Start new game\n2.Exit");
+                    string userInputAfterAGame = Console.ReadLine();
+                    bool inputAfterGameParsed = int.TryParse(userInputAfterAGame, out int afterGameChoise);
+                    if (!inputAfterGameParsed || afterGameChoise < 1 || afterGameChoise > 3)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Wrong input!!!\nPlease select 1 or 2");
+                        Console.ResetColor();
+                        continue;
+                    }
+                    else if(afterGameChoise == 1)
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                
+                //if(afterGameChoise == 1)
+                //{
+                //    continue;
+                //}
+                //else
+                //{
+                //    break;
+                //}
+            }
+            
+
+
 
         }
         static void Login(List<Users> users)
@@ -92,13 +133,16 @@ namespace Heroes_Journey
         
         static Character CharaterCreate(List<Race> allRaces, List<CharacterClass> allClasses)
         {
+
             Race seectedRace = null;
 
             CharacterClass seectedClass = null;
 
             while (true)
             {
-                Console.WriteLine("\nWellcome to Heroes Journey\n");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Wellcome to Heroes Journey\n");
+                Console.ResetColor();
                 Console.Write("Choose a name :");
                 string inputNameCharacter = Console.ReadLine();
                 Console.Clear();
@@ -172,7 +216,9 @@ namespace Heroes_Journey
                 Console.WriteLine($"{newCharacter.CharacterInfo()}\n");
                 Console.WriteLine(newCharacter.Stats());
                 Console.ResetColor();
-                
+                Console.WriteLine("Press any key to continue");
+                string anyKeyToContiniue = Console.ReadLine();
+                Console.Clear();
                 return newCharacter;
 
             }
@@ -186,77 +232,97 @@ namespace Heroes_Journey
             int landSharkDamage = -50;
             int ratDamage = -10;
             int rockDamage = -30;
-
-            Console.WriteLine("Bandits attack you out of nowhere. They seem very dangerous..");
-            Console.WriteLine($"\nHealth: {player.Race.Health}");
-            Console.WriteLine("\n1.Fight\n2.Run");
-            
-            string event1Selection = Console.ReadLine();
-            Console.Clear();
-            bool event1Parsed = int.TryParse(event1Selection, out int event1NumberSelect);
-            if(!event1Parsed || event1NumberSelect < 1 || event1NumberSelect > 2)
+            while (true)
             {
-                Console.WriteLine("\nWrong input!! Plese select 1 or 2\n");
+                Console.WriteLine("Bandits attack you out of nowhere. They seem very dangerous..");
+                Console.WriteLine($"\nHealth: {player.Health}");
+                Console.WriteLine("\n1.Fight\n2.Run");
+
+                string event1Selection = Console.ReadLine();
+                Console.Clear();
+                bool event1Parsed = int.TryParse(event1Selection, out int event1NumberSelect);
+                if (!event1Parsed || event1NumberSelect < 1 || event1NumberSelect > 2)
+                {
+                    Console.WriteLine("\nWrong input!! Plese select 1 or 2\n");
+                    continue;
+                }
+                FightOrRunSelect(event1NumberSelect, banditsDamage, player);
+
+                if (player.Health <= 0) break;
+
+                Console.WriteLine("You bump in to one of the guards of the nearby village. They attack you without warning...");
+                Console.WriteLine($"\nHealth {player.Health}");
+                Console.WriteLine("\n1.Fight\n2.Run");
+
+                string event2Selection = Console.ReadLine();
+                Console.Clear();
+                bool event2Parsed = int.TryParse(event2Selection, out int event2NumberSelection);
+                if (!event2Parsed || event2NumberSelection < 1 || event2NumberSelection > 2)
+                {
+                    Console.WriteLine("\nWrong input!! Plese select 1 or 2");
+                    continue;
+                }
+                FightOrRunSelect(event2NumberSelection, guardsDamage, player);
+                if (player.Health <= 0) break;
+
+                Console.WriteLine("A Land Shark appears. It starts chasing you down to eat you...");
+                Console.WriteLine($"\nHealth {player.Health}");
+                Console.WriteLine("\n1.Fight\n2.Run");
+                string event3Selection = Console.ReadLine();
+                Console.Clear();
+                bool event3Parsed = int.TryParse(event3Selection, out int event3NumberSelection);
+                if (!event3Parsed || event3NumberSelection < 1 || event3NumberSelection > 2)
+                {
+                    Console.WriteLine("\nWrong input!! Plese select 1 or 2");
+                    continue;
+                }
+                FightOrRunSelect(event3NumberSelection, landSharkDamage, player);
+                if (player.Health <= 0) break;
+
+                Console.WriteLine("You accidentally step on a rat. His friends are not happy. They attack..");
+                Console.WriteLine($"\nHealth {player.Health}");
+                Console.WriteLine("\n1.Fight\n2.Run");
+                string event4Selection = Console.ReadLine();
+                Console.Clear();
+                bool event4Parsed = int.TryParse(event4Selection, out int event4NumberSelection);
+                if (!event4Parsed || event4NumberSelection < 1 || event4NumberSelection > 2)
+                {
+                    Console.WriteLine("\nWrong input!! Plese select 1 or 2");
+                    continue;
+                }
+                FightOrRunSelect(event4NumberSelection, ratDamage, player);
+                if (player.Health <= 0) break;
+
+                Console.WriteLine("You find a huge rock. It comes alive somehow and tries to smash you...");
+                Console.WriteLine($"\nHealth {player.Health}");
+                Console.WriteLine("\n1.Fight\n2.Run");
+                string event5Selection = Console.ReadLine();
+                Console.Clear();
+                bool event5Parsed = int.TryParse(event5Selection, out int event5NumberSelection);
+                if (!event5Parsed || event5NumberSelection < 1 || event5NumberSelection > 2)
+                {
+                    Console.WriteLine("\nWrong input!! Plese select 1 or 2");
+                    continue;
+                }
+                FightOrRunSelect(event5NumberSelection, rockDamage, player);
+                if (player.Health <= 0) break;
+
+                Console.Clear();
+                if (player.Health > 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("YOU WON ! ! !\n");
+                    Console.ResetColor();
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("YOU LOSE ! ! !\n");
+                    Console.ResetColor();
+                    break;
+                }
             }
-            FightOrRunSelect(event1NumberSelect, banditsDamage, player);
-
-
-            Console.WriteLine("You bump in to one of the guards of the nearby village. They attack you without warning...");
-            Console.WriteLine($"\nHealth {player.Health}");
-            Console.WriteLine("\n1.Fight\n2.Run");
-
-            string event2Selection = Console.ReadLine();
-            Console.Clear();
-            bool event2Parsed = int.TryParse(event2Selection, out int event2NumberSelection);
-            if(!event2Parsed || event2NumberSelection < 1 || event2NumberSelection > 2)
-            {
-                Console.WriteLine("\nWrong input!! Plese select 1 or 2");
-            }
-            FightOrRunSelect(event2NumberSelection, guardsDamage, player);
-       
-
-            Console.WriteLine("A Land Shark appears. It starts chasing you down to eat you...");
-            Console.WriteLine($"\nHealth {player.Health}");
-            Console.WriteLine("\n1.Fight\n2.Run");
-            string event3Selection = Console.ReadLine();
-            Console.Clear();
-            bool event3Parsed = int.TryParse(event3Selection, out int event3NumberSelection);
-            if (!event3Parsed || event3NumberSelection < 1 || event3NumberSelection > 2)
-            {
-                Console.WriteLine("\nWrong input!! Plese select 1 or 2");
-            }
-            FightOrRunSelect(event3NumberSelection, landSharkDamage, player);
-
-            Console.WriteLine("You accidentally step on a rat. His friends are not happy. They attack..");
-            Console.WriteLine($"\nHealth {player.Health}");
-            Console.WriteLine("\n1.Fight\n2.Run");
-            string event4Selection = Console.ReadLine();
-            Console.Clear();
-            bool event4Parsed = int.TryParse(event4Selection, out int event4NumberSelection);
-            if (!event4Parsed || event4NumberSelection < 1 || event4NumberSelection > 2)
-            {
-                Console.WriteLine("\nWrong input!! Plese select 1 or 2");
-            }
-            FightOrRunSelect(event4NumberSelection, ratDamage, player);
-
-
-            Console.WriteLine("You find a huge rock. It comes alive somehow and tries to smash you...");
-            Console.WriteLine($"\nHealth {player.Health}");
-            Console.WriteLine("\n1.Fight\n2.Run");
-            string event5Selection = Console.ReadLine();
-            Console.Clear();
-            bool event5Parsed = int.TryParse(event5Selection, out int event5NumberSelection);
-            if (!event5Parsed || event5NumberSelection < 1 || event5NumberSelection > 2)
-            {
-                Console.WriteLine("\nWrong input!! Plese select 1 or 2");
-            }
-            FightOrRunSelect(event5NumberSelection, rockDamage, player);
-
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("YOU WON ! ! !\n");
-            Console.ResetColor();
-            Console.WriteLine("1.Start new game\n2.Exit");
         }
 
         static void FightOrRunSelect(int runOrFight, int eventNum, Character player)
@@ -265,28 +331,52 @@ namespace Heroes_Journey
             {
                 Random rnd = new Random();
                 int randNumber = rnd.Next(1, 10);
-                if (randNumber > player.Race.Strength)
+                if (randNumber > player.Race.Strength && player.Health > 0)
                 {
-                    player.Health -= eventNum;
+                    player.Health += eventNum;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You lost the fight");
+                    Console.ResetColor();
+                }
+                else if (player.Health <= 0)
+                {
+                    player.Health = 0;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("You lost\nGame over");
+                    Console.ResetColor();
+                    return;
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You win the fight");
+                    Console.ResetColor();
                 }
             }
             else if (runOrFight == 2)
             {
                 Random rnd = new Random();
                 int randNumber = rnd.Next(1, 10);
-                if (randNumber > player.Agility)
+                if (randNumber > player.Agility && player.Health > 0)
                 {
-                    player.Health -= eventNum;
+                    player.Health += eventNum;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("They catch you");
+                    Console.ResetColor();
+                }
+                else if (player.Health <= 0)
+                {
+                    player.Health = 0;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("You lost\nGame over");
+                    Console.ResetColor();
+                    return;
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You run away");
+                    Console.ResetColor();
                 }
             }
         }
