@@ -17,13 +17,15 @@ namespace Task_1
             Console.WriteLine("Grades student 1");
             newStudent.PrintUser();
             Console.WriteLine("\n");
+
             Console.WriteLine("Grades student 2");
             newStudent2.PrintUser();
             Console.WriteLine("\n");
+
             newTeacher.PrintUser();
             newTeacher2.PrintUser();
-            
 
+            Console.WriteLine("");
 
 
 
