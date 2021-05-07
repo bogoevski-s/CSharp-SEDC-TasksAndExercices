@@ -80,7 +80,6 @@ namespace Invoice_App
                     continue;
                 }
             }
-            
         }
         static User Login(List<User> users)
         {
@@ -250,7 +249,6 @@ namespace Invoice_App
             }
         }
 
-
         static void PayInvocie(Client client)
         {
             Console.Write("Please Enter invoice number :");
@@ -268,12 +266,6 @@ namespace Invoice_App
                 client.AllInvoices();
             }
         }
-
-        static void AdminMenu(Admin admin)
-        {
-            Console.WriteLine("");
-        }
-
 
     }
 }
