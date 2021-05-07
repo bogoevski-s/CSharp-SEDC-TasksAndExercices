@@ -9,25 +9,18 @@ namespace Models
     public class Client : User
     {
         private int Balance { get; set; }
-        public RoleEnum UserStatus { get; set; }
         public List<Invoice> InvoicesList { get; set; }
-        //public Invoice Invoice { get; set; }
-        public Client(string userName, string email, string password, int balance, RoleEnum userStatus) : base (userName, email, password)
+        public Client(string userName, string email, string password, int balance, RoleEnum role) : base (userName, email, password, role)
         {
             Balance = balance;
-            UserStatus = userStatus;
             InvoicesList = new List<Invoice>();
         }
-        //public void AddInvoice(Invoice newInvoice)
-        //{
-        //    InvoicesList.Add(newInvoice);
-            
-        //}
 
         public int CheckBalance()
         {
             return Balance;
         }
+
         public int AddBalance(int amount)
         {
             if (amount > 0)
@@ -36,34 +29,62 @@ namespace Models
             }
             else
             {
-                throw new Exception("Cant add negative numbers");
+                Console.Clear();
+                Console.WriteLine("Wrong input\nCant add negative numbers or characters. Please try again"); 
             }
             return Balance;
         }
+
         public int PayInvoice(int invoiceNum)
         {
             Invoice invoicePay = InvoicesList.FirstOrDefault(x => x.InvocieNumber == invoiceNum);
-            if(Balance >= invoicePay.Amount)
+            if(invoicePay == null)
             {
+                throw new Exception("Invoice number not found!!! Try again later");
+            }
+            if (invoicePay.Payed == true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nInvoice already paid\n");
+                Console.ResetColor();
+            }
+            else if(Balance >= invoicePay.Amount)
+            {
+                Console.Clear();
                 Balance -= invoicePay.Amount;
                 invoicePay.Payed = true;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nSuccessful paymet\n");
+                Console.ResetColor();
             }
             else
             {
-                Console.WriteLine("Not enough money");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nNot enough money\n");
+                Console.ResetColor();
             }
             
             return Balance;
         }
+
         public void AllInvoices()
         {
             foreach (Invoice invoices in InvoicesList)
             {
-                Console.WriteLine(invoices.InvoiceInfo());
+                if(invoices.Payed == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(invoices.InvoiceInfo());
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine(invoices.InvoiceInfo());
+                    invoices.PenaltyPayment();
+                }
             }
         }
-
-
-
     }
 }
